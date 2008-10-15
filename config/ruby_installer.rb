@@ -5,7 +5,7 @@ module RubyInstaller
     unless defined?(MAJOR)
       MAJOR = 3
       MINOR = 0
-      REVISION = 0
+      REVISION = 1
     end
   end
   

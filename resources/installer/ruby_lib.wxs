@@ -247,7 +247,7 @@
               <Component Id="comp_RUBY_LIB_107" DiskId="1" KeyPath="yes" Guid="03A59CCD-1B38-4FD1-ABCD-E85A01CBEEE7">
                 <File Id="file_RUBY_LIB_107" Name="BIGDEC_1.SO" LongName="bigdecimal.so" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\bigdecimal.so" />
                 <File Id="file_RUBY_LIB_108" Name="config.h" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\config.h" />
-                <File Id="file_RUBY_LIB_578" Name="curses.so" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\curses.so" />
+                <File Id="file_RUBY_LIB_580" Name="curses.so" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\curses.so" />
                 <File Id="file_RUBY_LIB_109" Name="defines.h" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\defines.h" />
                 <File Id="file_RUBY_LIB_110" Name="digest.h" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\digest.h" />
                 <File Id="file_RUBY_LIB_111" Name="digest.so" Source="..\..\sandbox\ruby_mingw\lib\ruby\1.8\i386-mingw32\digest.so" />

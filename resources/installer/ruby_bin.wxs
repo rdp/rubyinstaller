@@ -26,7 +26,7 @@
         <Component Id="comp_RUBY_BIN_0" DiskId="1" KeyPath="yes" Guid="7B45EC70-C61F-4685-9053-80815E2D1C0F">
           <File Id="file_RUBY_BIN_0" Name="erb" Source="..\..\sandbox\ruby_mingw\bin\erb" />
           <File Id="file_RUBY_BIN_1" Name="erb.bat" Source="..\..\sandbox\ruby_mingw\bin\erb.bat" />
-          <File Id="file_RUBY_BIN_18" Name="gdbm3.dll" Source="..\..\sandbox\ruby_mingw\bin\gdbm3.dll" />
+          <File Id="file_RUBY_BIN_21" Name="gdbm3.dll" Source="..\..\sandbox\ruby_mingw\bin\gdbm3.dll" />
           <File Id="file_RUBY_BIN_3" Name="irb" Source="..\..\sandbox\ruby_mingw\bin\irb" />
           <File Id="file_RUBY_BIN_4" Name="irb.bat" Source="..\..\sandbox\ruby_mingw\bin\irb.bat" />
           <File Id="file_RUBY_BIN_5" Name="libeay32.dll" Source="..\..\sandbox\ruby_mingw\bin\libeay32.dll" />

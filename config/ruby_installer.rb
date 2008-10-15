@@ -74,7 +74,7 @@ module RubyInstaller
         'readline5.dll',
         'zlib1.dll',
         'libeay32.dll',
-        'libssl32.dll',
+        'ssleay32.dll',
         'libiconv2.dll',
         'pdcurses.dll',
         'gdbm3.dll'

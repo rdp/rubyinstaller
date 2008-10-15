@@ -25,7 +25,7 @@ namespace(:interpreter) do
     end
 
     task :checkout => "downloads" do
-      Dir.chdir(RubyInstaller::ROOT) do
+      cd RubyInstaller::ROOT do
         # If is there already a checkout, update instead of checkout"
         if File.exist?(File.join(RubyInstaller::ROOT, package.checkout_target, '.svn'))
           sh "svn update #{package.checkout_target}"
@@ -45,36 +45,41 @@ namespace(:interpreter) do
           extract(File.join(RubyInstaller::ROOT, f), package.target)
         }
       else
-        FileUtils.cp_r(package.checkout_target, File.join(RubyInstaller::ROOT, 'sandbox'), :verbose => true)
+        cp_r(package.checkout_target, File.join(RubyInstaller::ROOT, 'sandbox'), :verbose => true, :remove_destination => true)
       end
     end
     ENV['CHECKOUT'] ? task(:extract => :checkout) : task(:extract => :download)
 
     task :prepare => [package.build_target] do
-      Dir.chdir(RubyInstaller::ROOT) do
-        FileUtils.cp_r(Dir.glob('resources/icons/*.ico'), package.build_target, :verbose => true)
+      cd RubyInstaller::ROOT do
+        cp_r(Dir.glob('resources/icons/*.ico'), package.build_target, :verbose => true)
       end
 
       # FIXME: Readline is not working, remove it for now.
-      Dir.chdir package.target do
-        FileUtils.rm_f 'test/readline/test_readline.rb'
+      cd package.target do
+        rm_f 'test/readline/test_readline.rb'
       end
     end
 
-    task :configure => [package.target, package.build_target] do
-      # check for configure script existance or checkout being used.
-      if File.exist?(File.join(package.target, '.svn')) or !File.exist?(File.join(package.target, 'configure'))
-        Dir.chdir(package.target) do
-          msys_sh "autoconf"
-        end
+    makefile = File.join(package.build_target, 'Makefile')
+    configurescript = File.join(package.target, 'configure')
+
+    file configurescript => [ package.target ] do
+      cd package.target do
+        msys_sh "autoconf"
       end
-      Dir.chdir(package.build_target) do
+    end
+
+    file makefile => [ package.build_target, configurescript ] do
+      cd package.build_target do
         msys_sh "../ruby_1_8/configure #{package.configure_options.join(' ')} --prefix=#{File.join(RubyInstaller::ROOT, package.install_target)}"
       end
     end
 
-    task :compile => [:openssl] do
-      Dir.chdir(package.build_target) do
+    task :configure => makefile
+
+    task :compile => [makefile, :openssl] do
+      cd package.build_target do
         msys_sh "make"
       end
     end
@@ -83,20 +88,20 @@ namespace(:interpreter) do
       full_install_target = File.expand_path(File.join(RubyInstaller::ROOT, package.install_target))
       
       # perform make install
-      Dir.chdir(package.build_target) do
+      cd package.build_target do
         msys_sh "make install"
       end
       
       # verbatim copy the binaries listed in package.dependencies
       package.dependencies.each do |dep|
-        Dir.glob("#{RubyInstaller::MinGW.target}/**/#{dep}").each do |f|
-          FileUtils.cp(f, File.join(package.install_target, "bin"))
+        Dir.glob("#{RubyInstaller::MinGW.target}/**/#{dep}").each do |path|
+          cp path, File.join(package.install_target, "bin")
         end
       end
       
       # copy original scripts from ruby_1_8 to install_target
-      Dir.glob("#{package.target}/bin/*").each do |f|
-        FileUtils.cp(f, File.join(package.install_target,"bin"))
+      Dir.glob("#{package.target}/bin/*").each do |path|
+        cp path, File.join(package.install_target, "bin")
       end
 
       # remove path reference to sandbox (after install!!!)
@@ -109,14 +114,14 @@ namespace(:interpreter) do
     task :check do
       new_ruby = File.join(RubyInstaller::ROOT, package.install_target, "bin").gsub(File::SEPARATOR, File::ALT_SEPARATOR)
       ENV['PATH'] = "#{new_ruby};#{ENV['PATH']}"
-      Dir.chdir(package.build_target) do
+      cd package.build_target do
         msys_sh "make check"
       end
     end
 
     task :manifest do
       manifest = File.open(File.join(package.build_target, "manifest"), 'w')
-      Dir.chdir(package.install_target) do
+      cd package.install_target do
         Dir.glob("**/*").each do |f|
           manifest.puts(f) unless File.directory?(f)
         end
@@ -125,7 +130,7 @@ namespace(:interpreter) do
     end
 
     task :irb do
-      Dir.chdir(File.join(package.install_target, 'bin')) do
+      cd File.join(package.install_target, 'bin') do
         sh "irb"
       end
     end

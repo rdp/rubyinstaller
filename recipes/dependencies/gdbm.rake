@@ -2,9 +2,8 @@ require 'rake'
 require 'rake/clean'
 
 namespace(:dependencies) do
-  namespace(:iconv) do
-    # zlib needs mingw and downloads
-    package = RubyInstaller::Iconv
+  namespace(:gdbm) do
+    package = RubyInstaller::Gdbm
     directory package.target
     CLEAN.include(package.target)
     
@@ -24,7 +23,7 @@ namespace(:dependencies) do
     # Prepare the :sandbox, it requires the :download task
     task :extract => [:extract_utils, :download, package.target] do
       # grab the files from the download task
-      files = Rake::Task['dependencies:iconv:download'].prerequisites
+      files = Rake::Task['dependencies:gdbm:download'].prerequisites
 
       files.each { |f|
         extract(File.join(RubyInstaller::ROOT, f), package.target)
@@ -32,20 +31,18 @@ namespace(:dependencies) do
     end
     
     task :prepare => [package.target] do
-      # win_iconv needs some adjustments.
-      # remove *.txt
-      # remove src folder
-      # leave zlib1.dll inside bin ;-)
+      # gdbm needs some adjustments.
+      # move gdbm-dll.h from source to include
       cd File.join(RubyInstaller::ROOT, package.target) do
-        rm_rf "src"
-        Dir.glob("*.txt").each do |path|
-          rm_f path
-        end
+        files = Dir.glob(File.join('src', 'gdbm', '*', 'gdbm-*-src', 'gdbm-dll.h'))
+        fail "Multiple gdbm-dll.h files found." unless files.size == 1
+        gdbm_dll_h = files[0]
+        cp gdbm_dll_h, 'include'
       end
     end
   end
 end
 
-task :download  => ['dependencies:iconv:download']
-task :extract   => ['dependencies:iconv:extract']
-task :prepare   => ['dependencies:iconv:prepare']
+task :download  => ['dependencies:gdbm:download']
+task :extract   => ['dependencies:gdbm:extract']
+task :prepare   => ['dependencies:gdbm:prepare']

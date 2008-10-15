@@ -73,7 +73,11 @@ module RubyInstaller
       :dependencies => [
         'readline5.dll',
         'zlib1.dll',
-        'libiconv2.dll'
+        'libeay32.dll',
+        'libssl32.dll',
+        'libiconv2.dll',
+        'pdcurses.dll',
+        'gdbm3.dll'
       ]
     )
 
@@ -97,6 +101,15 @@ module RubyInstaller
       :files => [
         'readline-5.0-bin.zip',
         'readline-5.0-lib.zip'
+      ]
+    )
+
+    PdCurses = OpenStruct.new(
+      :version => '3.3',
+      :url => "http://downloads.sourceforge.net/pdcurses",
+      :target => RubyInstaller::MinGW.target,
+      :files => [ 
+        'pdc33dll.zip' 
       ]
     )
   
@@ -127,11 +140,23 @@ module RubyInstaller
         'libiconv-1.9.2-1-lib.zip'
       ]
     )
+
+    Gdbm = OpenStruct.new(
+      :release => 'official',
+      :version => '1.8.3-1',
+      :url => "http://easynews.dl.sourceforge.net/gnuwin32",
+      :target => RubyInstaller::MinGW.target,
+      :files => [
+        'gdbm-1.8.3-1-bin.zip',
+        'gdbm-1.8.3-1-lib.zip',
+        'gdbm-1.8.3-1-src.zip'
+      ]
+    )
     
     RubyGems = OpenStruct.new(
       :release => 'official',
-      :version => '1.2.0',
-      :url => 'http://rubyforge.org/frs/download.php/38646',
+      :version => '1.3.0',
+      :url => 'http://rubyforge.org/frs/download.php/43985',
       :checkout => 'svn://rubyforge.org/var/svn/rubygems/trunk',
       :checkout_target => 'downloads/rubygems',
       :target => 'sandbox/rubygems',
@@ -141,7 +166,7 @@ module RubyInstaller
         '--no-rdoc'
       ],
       :files => [
-        'rubygems-1.2.0.tgz'
+        'rubygems-1.3.0.tgz'
       ]
     )
     

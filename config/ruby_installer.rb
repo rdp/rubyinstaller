@@ -200,7 +200,7 @@ module RubyInstaller
     )
     
     Runtime = OpenStruct.new(
-      :version => '1.8.6-p114',
+      :version => RubyInstaller::Ruby18.version,
       :ruby_version_source => RubyInstaller::Ruby18.target,
       :rubygems_version_source => RubyInstaller::RubyGems.target,
       :namespace => 'runtime',

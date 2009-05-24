@@ -87,7 +87,7 @@ module RubyInstaller
       :checkout => ENV['TRUNK'] ? 
         'http://svn.ruby-lang.org/repos/ruby/trunk' : 
 	'http://svn.ruby-lang.org/repos/ruby/branches/ruby_1_9_1',
-      :checkout_target => ENV['TRUNK'] ? 'downloads/ruby_trunk' : 'downloads/ruby_1_9',
+      :checkout_target => 'downloads/ruby_1_9',
       :target => 'sandbox/ruby_1_9',
       :build_target => 'sandbox/ruby19_build',
       :install_target => 'sandbox/ruby19_mingw',

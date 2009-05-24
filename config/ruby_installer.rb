@@ -84,8 +84,10 @@ module RubyInstaller
       :release => "stable",
       :version => "1.9.1-p129",
       :url => "http://ftp.ruby-lang.org/pub/ruby/1.9",
-      :checkout => 'http://svn.ruby-lang.org/repos/ruby/branches/ruby_1_9_1',
-      :checkout_target => 'downloads/ruby_1_9',
+      :checkout => ENV['TRUNK'] ? 
+        'http://svn.ruby-lang.org/repos/ruby/trunk' : 
+	'http://svn.ruby-lang.org/repos/ruby/branches/ruby_1_9_1',
+      :checkout_target => ENV['TRUNK'] ? 'downloads/ruby_trunk' : 'downloads/ruby_1_9',
       :target => 'sandbox/ruby_1_9',
       :build_target => 'sandbox/ruby19_build',
       :install_target => 'sandbox/ruby19_mingw',

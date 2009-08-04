@@ -10,8 +10,13 @@ namespace(:compiler) do
     
     # Put files for the :download task
     package.files.each do |f|
-      file_source = "#{package.url}/#{f}"
-      file_target = "downloads/#{f}"
+      if(f.start_with? 'http://')
+         file_source = f
+         file_target = "downloads/#{f.split('/')[-1]}"
+      else
+        file_source = "#{package.url}/#{f}"
+        file_target = "downloads/#{f}"
+      end
       download file_target => file_source
       
       # depend on downloads directory
@@ -29,7 +34,14 @@ namespace(:compiler) do
       files.each { |f|
         extract(File.join(RubyInstaller::ROOT, f), package.target)
       }
+      if ENV['TDM']
+        # the old pthread thing strikes us if we're using 1.9.1
+        Dir['**/pthread*.h'].each do |file|
+           File.delete file
+        end
+      end
     end
+   
   end
 end
 

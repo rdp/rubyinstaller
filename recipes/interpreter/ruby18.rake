@@ -166,6 +166,7 @@ end
 # add compiler and dependencies to the mix
 task :ruby18 => [:compiler, :dependencies]
 
+desc "compile Ruby 1.8"
 task :ruby18 => [
   'interpreter:ruby18:download_or_checkout',
   'interpreter:ruby18:extract',
@@ -176,7 +177,7 @@ task :ruby18 => [
 ]
 
 # Add rubygems to the chain
-task :ruby18 => [:rubygems]
+task :ruby18 => [:rubygems18]
 
 # add Pure Readline to the chain
 unless ENV['READLINE']

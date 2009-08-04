@@ -196,7 +196,7 @@ module URI
           end
           yield progress_bar
         ensure
-          progress_bar.finish rescue nil
+          progress_bar.finish
         end
       else
         progress_bar = Object.new

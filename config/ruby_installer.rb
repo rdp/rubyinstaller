@@ -59,8 +59,7 @@ module RubyInstaller
     )
 
     Ruby18 = OpenStruct.new(
-      :release => "preview1",
-      :version => "1.8.6-p368",
+      :version => "1.8.6-p383",
       :url => "http://ftp.ruby-lang.org/pub/ruby/1.8",
       :checkout => 'http://svn.ruby-lang.org/repos/ruby/branches/ruby_1_8_6',
       :checkout_target => 'downloads/ruby_1_8',
@@ -73,10 +72,9 @@ module RubyInstaller
         '--disable-install-doc'
       ],
       :files => [
-        'ruby-1.8.6-p368.tar.bz2'
+        'ruby-1.8.6-p383.tar.bz2'
       ],
       :dependencies => [
-        'readline5.dll',
         'zlib1.dll',
         'libeay32.dll',
         'libssl32.dll',
@@ -87,8 +85,7 @@ module RubyInstaller
     )
 
     Ruby19 = OpenStruct.new(
-      :release => "stable",
-      :version => "1.9.1-p129",
+      :version => "1.9.1-p243",
       :url => "http://ftp.ruby-lang.org/pub/ruby/1.9",
       :checkout => ENV['TRUNK'] ? 
         'http://svn.ruby-lang.org/repos/ruby/trunk' : 
@@ -102,10 +99,9 @@ module RubyInstaller
         '--disable-install-doc'
       ],
       :files => [
-        'ruby-1.9.1-p129.tar.bz2'
+        'ruby-1.9.1-p243.tar.bz2'
       ],
       :dependencies => [
-        #'readline5.dll',
         'zlib1.dll',
         'libeay32.dll',
         'libssl32.dll',
@@ -128,19 +124,6 @@ module RubyInstaller
       :target => RubyInstaller::MinGW.target,
       :files => [
         'zlib123-dll.zip'
-      ]
-    )
-    
-    # FIXME: using direct mirror for Readline since GnuWin32 seems failing
-    # to grab a correct link (stack level too deep due redirections)
-    Readline = OpenStruct.new(
-      :release => "official",
-      :version => "5.0",
-      :url => "http://downloads.sourceforge.net/sourceforge/gnuwin32",
-      :target => RubyInstaller::MinGW.target,
-      :files => [
-        'readline-5.0-bin.zip',
-        'readline-5.0-lib.zip'
       ]
     )
 
@@ -206,8 +189,8 @@ module RubyInstaller
 
     RubyGems = OpenStruct.new(
       :release => 'official',
-      :version => '1.3.4',
-      :url => 'http://rubyforge.org/frs/download.php/57643',
+      :version => '1.3.5',
+      :url => 'http://rubyforge.org/frs/download.php/60718',
       :checkout => 'svn://rubyforge.org/var/svn/rubygems/trunk',
       :checkout_target => 'downloads/rubygems',
       :target => 'sandbox/rubygems',
@@ -216,42 +199,18 @@ module RubyInstaller
         '--no-rdoc'
       ],
       :files => [
-        'rubygems-1.3.4.tgz'
+        'rubygems-1.3.5.tgz'
       ]
     )
 
-=begin
-    Runtime18 = OpenStruct.new(
-      :version => RubyInstaller::Ruby18.version,
-      :ruby_version_source => RubyInstaller::Ruby18.target,
-      :rubygems_version_source => RubyInstaller::RubyGems.target,
-      :namespace => 'runtime18',
-      :source => 'resources/installer',
-      :package_name => 'rubyinstaller',
-      :wix_config => {
-          'ProductCode'=> "D7BFC0DB-2D60-4905-AFD4-87D05D70D7F2",
-          'UpgradeCode'=> "419CB0D6-C20E-4553-B415-698427244883",
-          'Year' =>  "2008-2009",
-          'ProductName' =>  "Ruby Installer #{RubyInstaller::Ruby18.version}",
-          'ProductVersion' =>  "",
-          'InstallName' =>  "RubyInstaller",
-          'InstallId' =>  "Ruby",
-          'ProductURL' =>  "http://rubyinstaller.rubyforge.org/",
-          'RuntimeTitle' =>  "Standard Ruby",
-          'RuntimeDescription' =>  "Standard package including Ruby and libraries required for proper behavior of the language",
-          'RubyTitle' =>  "Ruby + RubyGems",
-          'RubyVersion' =>  "",
-          'RubyDescription' =>  "Matz Ruby Implementation, standard library and RubyGems",
-          'RubyGemsVersion' =>  ""
-        },
-      :wix_files => [
-        'main.wxs',
-        'ruby18_bin.wxs',
-        'ruby18_lib.wxs',
-        'ruby18_env.wxs'
-      ],
-      :config_file => 'config.wxi.erb'
+    Book = OpenStruct.new(
+      :release => 'official',
+      :version => '2009-04-18',
+      :url => 'http://www.sapphiresteel.com/IMG/zip',
+      :target => 'sandbox/book',
+      :files => [
+        'book-of-ruby.zip'
+      ]
     )
-=end
   end
 end

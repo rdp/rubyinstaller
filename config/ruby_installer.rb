@@ -85,9 +85,7 @@ module RubyInstaller
     Ruby19 = OpenStruct.new(
       :version => "1.9.1-p243",
       :url => "http://ftp.ruby-lang.org/pub/ruby/1.9",
-      :checkout => ENV['TRUNK'] ? 
-        'http://svn.ruby-lang.org/repos/ruby/trunk' : 
-	'http://svn.ruby-lang.org/repos/ruby/branches/ruby_1_9_1',
+      :checkout => 'http://svn.ruby-lang.org/repos/ruby/branches/ruby_1_9_1',
       :checkout_target => 'downloads/ruby_1_9',
       :target => 'sandbox/ruby_1_9',
       :build_target => 'sandbox/ruby19_build',

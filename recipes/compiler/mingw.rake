@@ -10,7 +10,7 @@ namespace(:compiler) do
     
     # Put files for the :download task
     package.files.each do |f|
-      if(f.start_with? 'http://')
+      if(f.index('http://') == 0) # start_with? 'http://'
          file_source = f
          file_target = "downloads/#{f.split('/')[-1]}"
       else

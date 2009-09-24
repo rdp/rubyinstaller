@@ -21,8 +21,8 @@ module RubyInstaller
     gcc = 'gcc-core-3.4.5-20060117-3.tar.gz'
     gpp =  'gcc-g++-3.4.5-20060117-3.tar.gz'
     if ENV['TDM']
-      gcc = 'http://downloads.sourceforge.net/project/tdm-gcc/TDM-GCC%204.4%20series/4.4.0-tdm-1%20%28r2%29%20SJLJ/gcc-4.4.0-tdm-1-core-2.tar.gz'
-      gpp = "http://downloads.sourceforge.net/project/tdm-gcc/TDM-GCC%204.4%20series/4.4.0-tdm-1%20%28r2%29%20SJLJ/gcc-4.4.0-tdm-1-g%2B%2B-2.tar.gz"
+      gcc = 'http://downloads.sourceforge.net/project/tdm-gcc/TDM-GCC%204.4%20series/Previous%20Releases/4.4.0-tdm-1%20%28r2%29%20SJLJ/gcc-4.4.0-tdm-1-core-2.tar.gz'
+      gpp = 'http://downloads.sourceforge.net/project/tdm-gcc/TDM-GCC%204.4%20series/Previous%20Releases/4.4.0-tdm-1%20%28r2%29%20SJLJ/gcc-4.4.0-tdm-1-g%2B%2B-2.tar.gz'
     end
 
     MinGW = OpenStruct.new(
